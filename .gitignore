@@ -1,0 +1,10 @@
+target
+.bloop
+.idea
+.metals
+.vscode
+metals.sbt
+.null
+metastore_db/
+
+null/

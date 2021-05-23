@@ -1,6 +1,6 @@
-# Spark sbt template
+# Log Analysis With Scala
 
-This sbt template enables you to create a new spark project 
+This sbt scala project which analyses log files
 
 ## Package
 

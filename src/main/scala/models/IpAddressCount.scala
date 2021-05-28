@@ -1,4 +1,3 @@
 package models
 
-
-case class IpAddressCount(date : String, ip : String, count: BigInt)
+case class IpAddressCount(date: String, ip: String, count: BigInt)

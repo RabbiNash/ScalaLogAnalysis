@@ -18,6 +18,7 @@ libraryDependencies += "org.apache.spark" %% "spark-sql" % sparkVersion % "provi
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.8"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.8" % "test"
 //libraryDependencies += "com.holdenkarau" %% "spark-testing-base" % "2.4.3_0.12.0" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.8" % Test
 
 fork in Test := true
 javaOptions ++= Seq("-Xms512M", "-Xmx2048M", "-XX:MaxPermSize=2048M", "-XX:+CMSClassUnloadingEnabled")

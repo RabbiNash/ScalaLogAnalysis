@@ -1,11 +1,11 @@
 package jobs
 
 import mappers.AccessLogMapper.toAccessLog
-import models.{AccessLog, IpAddressCount, UriCount}
-import org.apache.spark.sql.functions.{col, collect_list, map_from_arrays, to_timestamp}
-import org.apache.spark.sql.{Dataset, Encoder, Encoders, SparkSession}
+import models.{ AccessLog, IpAddressCount, UriCount }
+import org.apache.spark.sql.functions.{ col, collect_list, map_from_arrays, to_timestamp }
+import org.apache.spark.sql.{ Dataset, Encoder, Encoders, SparkSession }
 import utils.Utils
-import utils.Utils.{AccessLogView, SepRegex}
+import utils.Utils.{ AccessLogView, SepRegex }
 
 object AnalysisJob {
 
@@ -31,7 +31,7 @@ object AnalysisJob {
     val ipCountDateGrouped = spark.sql("select cast(datetime as date) as date, ip, count(*) as count from AccessLog group by date,ip having count > 20000 order by count desc")
       .as[IpAddressCount](Encoders.product[IpAddressCount])
 
-    retrieveIpReport(ipCountDateGrouped,Utils.OutputIpJsonPath)
+    retrieveIpReport(ipCountDateGrouped, Utils.OutputIpJsonPath)
 
     //retrieve URIs resources
     val uriCountDateGrouped = spark.sql("select cast(datetime as date) as date, request, count(*) as count from AccessLog group by date,request having count > 20000 order by count desc")
@@ -40,15 +40,15 @@ object AnalysisJob {
     retrieveUrisReport(uriCountDateGrouped, Utils.OutputUriJsonPath)
   }
 
-  def retrieveUrisReport(dataset: Dataset[UriCount], outputPath : String): Unit = {
-    baseReportExtractor[UriCount](dataset,"request","requests","requestCount",outputPath)
+  def retrieveUrisReport(dataset: Dataset[UriCount], outputPath: String): Unit = {
+    baseReportExtractor[UriCount](dataset, "request", "requests", "requestCount", outputPath)
   }
 
-  def retrieveIpReport(dataset: Dataset[IpAddressCount], outputPath : String): Unit = {
-    baseReportExtractor[IpAddressCount](dataset,"ip","ips","ipCount",outputPath)
+  def retrieveIpReport(dataset: Dataset[IpAddressCount], outputPath: String): Unit = {
+    baseReportExtractor[IpAddressCount](dataset, "ip", "ips", "ipCount", outputPath)
   }
 
-  def baseReportExtractor[T](dataset: Dataset[T], colName : String, alias : String, updatedColName : String, outputPath : String): Unit ={
+  def baseReportExtractor[T](dataset: Dataset[T], colName: String, alias: String, updatedColName: String, outputPath: String): Unit = {
     dataset.groupBy("date").agg(collect_list(col(colName))
       .as(alias), collect_list("count")
       .as("counts")).select(col("date"), map_from_arrays(col(alias), col("counts")))

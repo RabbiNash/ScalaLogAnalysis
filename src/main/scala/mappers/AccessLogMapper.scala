@@ -14,8 +14,7 @@ object AccessLogMapper {
     params(SizePos),
     params(RefererPos),
     params(UserAgentPos),
-    params(UnkPos)
-  )
+    params(UnkPos))
 
   //constants to avoid magic numbers
   val IdentPos = 1

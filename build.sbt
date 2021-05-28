@@ -4,7 +4,7 @@ version := "1.0"
 
 val sparkVersion = "3.1.1"
 
-name := "spark-sbt-template"
+name := "SparkLogAnalysis"
 
 logBuffered in Test := false
 
@@ -12,6 +12,8 @@ scalaVersion := "2.12.10"
 
 libraryDependencies += "org.apache.spark" %% "spark-core" % sparkVersion % "provided"
 libraryDependencies += "org.apache.spark" %% "spark-sql" % sparkVersion % "provided"
+libraryDependencies += "commons-io" % "commons-io" % "2.9.0"
+
 //libraryDependencies += "org.apache.spark" %% "spark-streaming" % sparkVersion % "provided"
 //libraryDependencies += "org.apache.spark" %% "spark-streaming-kinesis-asl" % sparkVersion
 

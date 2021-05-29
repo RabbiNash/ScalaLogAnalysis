@@ -1,26 +1,26 @@
 package jobs
 
 import mappers.AccessLogMapper.toAccessLog
-import models.{AccessLog, IpAddressCount, UriCount}
-import org.apache.spark.sql.functions.{col, collect_list, map_from_arrays, to_timestamp}
-import org.apache.spark.sql.{Dataset, Encoders, SparkSession}
-import utils.{CustomFileUtils, Utils}
-import utils.Utils.{AccessLogView, SepRegex}
+import models.{ AccessLog, IpAddressCount, UriCount }
+import org.apache.spark.sql.functions.{ col, collect_list, map_from_arrays, to_timestamp }
+import org.apache.spark.sql.{ Dataset, Encoders, SparkSession }
+import utils.{ CustomFileUtils, Utils }
+import utils.Utils.{ AccessLogView, SepRegex }
 
-import java.nio.file.{Path, Paths}
+import java.nio.file.{ Path, Paths }
 
 object AnalysisJob {
 
   var spark: SparkSession = _
 
-  def startJob(sparkSession: SparkSession, sourcePath : String, reportPath : String) {
+  def startJob(sparkSession: SparkSession, sourcePath: String, reportPath: String) {
     spark = sparkSession
 
     createReport(sourcePath, reportPath)
     cleanUp()
   }
 
-  private def createReport(gzPath: String, reportPath : String) {
+  private def createReport(gzPath: String, reportPath: String) {
 
     extractFromGz(Paths.get(gzPath), Paths.get(Utils.AccessLogPath))
 
@@ -37,7 +37,7 @@ object AnalysisJob {
     val ipCountDateGrouped = spark.sql("select cast(datetime as date) as date, ip, count(*) as count from AccessLog group by date,ip having count > 20000 order by count desc")
       .as[IpAddressCount](Encoders.product[IpAddressCount])
 
-    retrieveIpReport(ipCountDateGrouped, s"${reportPath}/report_ips.json" )
+    retrieveIpReport(ipCountDateGrouped, s"${reportPath}/report_ips.json")
 
     //retrieve URIs resources
     val uriCountDateGrouped = spark.sql("select cast(datetime as date) as date, request, count(*) as count from AccessLog group by date,request having count > 20000 order by count desc")
@@ -46,7 +46,7 @@ object AnalysisJob {
     retrieveUrisReport(uriCountDateGrouped, s"${reportPath}/report_uris.json")
   }
 
-  private def extractFromGz(sourceFile : Path, destFile : Path ): Unit ={
+  private def extractFromGz(sourceFile: Path, destFile: Path): Unit = {
     CustomFileUtils.decompressGzipNio(sourceFile, destFile)
   }
 
@@ -67,7 +67,7 @@ object AnalysisJob {
       .coalesce(1).write.format("json").save(outputPath)
   }
 
-  def cleanUp(): Unit ={
+  def cleanUp(): Unit = {
     CustomFileUtils.deleteFile(Paths.get(Utils.AccessLogPath))
   }
 }

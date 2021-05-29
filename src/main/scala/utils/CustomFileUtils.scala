@@ -2,8 +2,8 @@ package utils
 
 import org.apache.commons.io.FileUtils
 
-import java.nio.file.{DirectoryNotEmptyException, Files, NoSuchFileException, Path, Paths}
-import java.io.{FileInputStream, IOException}
+import java.nio.file.{ DirectoryNotEmptyException, Files, NoSuchFileException, Path, Paths }
+import java.io.{ FileInputStream, IOException }
 import java.util.zip.GZIPInputStream
 
 object CustomFileUtils {
@@ -14,10 +14,13 @@ object CustomFileUtils {
       val gis = new GZIPInputStream(new FileInputStream(source.toFile))
       try Files.copy(gis, target)
       finally if (gis != null) gis.close()
+    } catch {
+      case x: IOException =>
+        System.err.println(x)
     }
   }
 
-  def deleteFile(filePath : Path): Unit ={
+  def deleteFile(filePath: Path): Unit = {
     try Files.delete(filePath)
     catch {
       case x: NoSuchFileException =>
@@ -30,14 +33,14 @@ object CustomFileUtils {
     }
   }
 
-  def deleteIfExists(outputPath : Path): Unit ={
-    if(checkIfFileExists(outputPath))
+  def deleteIfExists(outputPath: Path): Unit = {
+    if (checkIfFileExists(outputPath))
       deleteDirectory(outputPath)
   }
 
-  def deleteDirectory(filePath : Path): Unit ={
+  def deleteDirectory(filePath: Path): Unit = {
     FileUtils.deleteDirectory(filePath.toFile)
   }
 
-  def checkIfFileExists(filePath : Path) : Boolean = Files.exists(filePath)
+  def checkIfFileExists(filePath: Path): Boolean = Files.exists(filePath)
 }

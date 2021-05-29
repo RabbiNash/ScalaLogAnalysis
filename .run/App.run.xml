@@ -5,6 +5,7 @@
     <option name="INCLUDE_PROVIDED_SCOPE" value="true" />
     <option name="MAIN_CLASS_NAME" value="App" />
     <module name="SparkLogAnalysis" />
+    <option name="PROGRAM_PARAMETERS" value="-s src/res/access.log.gz -r src/res/reports" />
     <option name="VM_PARAMETERS" value="-Dspark.master=local[*]" />
     <method v="2">
       <option name="Make" enabled="true" />

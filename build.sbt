@@ -13,13 +13,11 @@ scalaVersion := "2.12.10"
 libraryDependencies += "org.apache.spark" %% "spark-core" % sparkVersion % "provided"
 libraryDependencies += "org.apache.spark" %% "spark-sql" % sparkVersion % "provided"
 libraryDependencies += "commons-io" % "commons-io" % "2.9.0"
-
-//libraryDependencies += "org.apache.spark" %% "spark-streaming" % sparkVersion % "provided"
-//libraryDependencies += "org.apache.spark" %% "spark-streaming-kinesis-asl" % sparkVersion
+libraryDependencies += "commons-cli" % "commons-cli" % "1.4"
+libraryDependencies += "com.github.losizm" %% "little-cli" % "0.8.0"
 
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.8"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.8" % "test"
-//libraryDependencies += "com.holdenkarau" %% "spark-testing-base" % "2.4.3_0.12.0" % "test"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.8" % Test
 
 fork in Test := true

@@ -2,7 +2,7 @@
 
 version := "1.0"
 
-val sparkVersion = "3.1.1"
+val sparkVersion = "3.0.1"
 
 name := "SparkLogAnalysis"
 

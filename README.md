@@ -36,7 +36,7 @@ spark-submit --master=local[*] --deploy-mode client --class App $JAR_PATH
 
 Make sure you include the app.run file as follows.
 
-```aidl
+```
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="App" type="Application" factoryName="Application">
     <option name="ALTERNATIVE_JRE_PATH" value="11" />
@@ -52,3 +52,32 @@ Make sure you include the app.run file as follows.
   </configuration>
 </component>
 ```
+## To Deploy on AWS
+
+### Upload resources
+
+You need to upload the access log file and the generate fatjar to s3.
+
+![](cdn/aws_upload_access_s3.png)
+
+### EMR Cluster
+
+Start an EMR cluster
+
+![](cdn/emr1.png)
+
+![](cdn/emr2.png)
+
+
+### Add the jar file to the cluster with arguments specified
+![](cdn/step3.png)
+
+Specify the arguments as below.
+
+```
+-s s3://dstilogrepo/access.log.gz -r s3://dstilogrepo/reports
+```
+
+
+
+

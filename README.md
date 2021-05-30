@@ -58,7 +58,7 @@ Make sure you include the app.run file as follows.
 
 You need to upload the access log file and the generate fatjar to s3.
 
-![](cdn/aws_upload_access_s3.png)
+![](cdn/aws_upload_access_s3.PNG)
 
 ### EMR Cluster
 

@@ -29,7 +29,7 @@ JAR_PATH=$(pwd)/target/scala-2.12/spark-sbt-template-assembly-1.0.jar
 spark-submit --master=local[*] --deploy-mode client --class App $JAR_PATH
 ```
 
-![](cdn/3.png)
+![](cdn/3.PNG)
 
 
 ## To run on IntelliJ
@@ -64,13 +64,13 @@ You need to upload the access log file and the generate fatjar to s3.
 
 Start an EMR cluster
 
-![](cdn/emr1.png)
+![](cdn/emr1.PNG)
 
 ![](cdn/emr2.png)
 
 
 ### Add the jar file to the cluster with arguments specified
-![](cdn/step3.png)
+![](cdn/step3.PNG)
 
 Specify the arguments as below.
 

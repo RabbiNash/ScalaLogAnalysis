@@ -8,7 +8,7 @@ To package your project:
 ```bash
 sbt assembly
 ```
-![](cdn/1.png)
+![](cdn/1.PNG)
 
 ## Deploy 
 
@@ -18,7 +18,7 @@ TARGET_LOCATION=<location>
 cp target/scala-2.12/spark-sbt-template-assembly-1.0.jar $TARGET_LOCATION
 ```
 
-![](cdn/2.png)
+![](cdn/2.PNG)
 
 
 ## Run

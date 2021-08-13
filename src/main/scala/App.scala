@@ -1,24 +1,30 @@
-import jobs.AnalysisJob
+/*
+* Author: Tinashe Makuti
+* */
+
 import org.apache.spark.sql.SparkSession
-import little.cli.Cli.{ application, option }
+import little.cli.Cli.{application, option}
 import little.cli.Implicits._
+import tasks.ExtractionTask
 
 object App {
 
   def main(args: Array[String]): Unit = {
 
     val spark = SparkSession.builder
-      .appName("Log Analysis")
+      .appName("Tinashe Log Analysis")
       .getOrCreate()
 
     import spark.implicits._
 
-    startAnalysisJob(args, spark)
+    startExtractionJob(args, spark)
 
     spark.stop
   }
 
-  private def startAnalysisJob(args: Array[String], sparkSession: SparkSession): Unit = {
+  private def startExtractionJob(args: Array[String], sparkSession: SparkSession): Unit = {
+
+    //use little CLI
     val app = application(
       "grep [ options ... ] <pattern> [ <fileName> ... ]",
       option("s", "source-path", hasArg = true, "Source gz compressed file path").argName("source_path"),
@@ -40,7 +46,7 @@ object App {
         return
       }
 
-      AnalysisJob.startJob(sparkSession, sourcePath.toString, reportPath.toString)
+      ExtractionTask.initJob(sparkSession, sourcePath.toString, reportPath.toString)
     }
   }
 }

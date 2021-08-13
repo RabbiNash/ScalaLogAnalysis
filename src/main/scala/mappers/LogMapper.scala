@@ -2,7 +2,7 @@ package mappers
 
 import models.AccessLog
 
-object AccessLogMapper {
+object LogMapper {
 
   def toAccessLog(params: List[String]): AccessLog = AccessLog(
     params.head,

@@ -6,7 +6,7 @@ import java.nio.file.{ DirectoryNotEmptyException, Files, NoSuchFileException, P
 import java.io.{ FileInputStream, IOException }
 import java.util.zip.GZIPInputStream
 
-object CustomFileUtils {
+object CustFileUtils {
 
   @throws[IOException]
   def decompressGzipNio(source: Path, target: Path): Unit = {
